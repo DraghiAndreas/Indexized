@@ -6,7 +6,7 @@ import yfinance as yf
 current_date = date.today()
 
 def init_db():
-    with sqlite3.connect('cache.db') as conn:
+    with sqlite3.connect('cache.sql') as conn:
         c = conn.cursor()
         c.execute("""
             CREATE TABLE IF NOT EXISTS last_update(
@@ -16,7 +16,7 @@ def init_db():
             """)
 
 def get_last_update():
-    with sqlite3.connect('cache.db') as conn:
+    with sqlite3.connect('cache.sql') as conn:
         c = conn.cursor()
         c.execute('SELECT data FROM last_update WHERE id = 1')
         row = c.fetchone()
@@ -25,7 +25,7 @@ def get_last_update():
         return None
 
 def set_last_update(new_date):
-    with sqlite3.connect('cache.db') as conn:
+    with sqlite3.connect('cache.sql') as conn:
         c = conn.cursor()
         c.execute("UPDATE last_update SET data = (?) WHERE id = 1", (str(new_date),))
         if c.rowcount == 0:
@@ -46,7 +46,7 @@ def cache():
     data = yf.download(tickers_str, period="1y", interval="1mo")
     data5 = yf.download(tickers_str,period="5d",interval="1d")
 
-    with sqlite3.connect('cache.db') as conn:
+    with sqlite3.connect('cache.sql') as conn:
         c=conn.cursor()
         c.execute("""
             CREATE TABLE IF NOT EXISTS user_cache(

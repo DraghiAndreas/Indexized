@@ -68,13 +68,13 @@ def reset():
 		c.execute("DROP TABLE user_portfolio")
 
 def get_currencies():
-	with sqlite3.connect('cache.db') as conn:
+	with sqlite3.connect('cache.sql') as conn:
 		c = conn.cursor()
 		c.execute('Select *  FROM user_cache WHERE ticker IN ("EURUSD=X","JPYUSD=X","GBPUSD=X","CNYUSD=X","CHFUSD=X") ORDER BY day_5 DESC')
 		return c.fetchall()
 
 def get_top_5(asc):
-	with sqlite3.connect('cache.db') as conn:
+	with sqlite3.connect('cache.sql') as conn:
 		c=conn.cursor()
 		if(asc):
 			c.execute("SELECT * FROM user_cache WHERE ticker NOT IN ('CHFUSD=X','EURUSD=X','JPYUSD=X','GBPUSD=X','CNYUSD=X') ORDER BY day_5 ASC LIMIT 5")
