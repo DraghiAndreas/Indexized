@@ -295,11 +295,27 @@ class MainWindow(QMainWindow):
         self.update_pie_chart(tick,val)
         self.update_total(tick,val)
         self.update_portfolio_graph(tick,val)
+        self.update_port_table(tick, val)
     
     def update_total(self,tick, am):
         total = np.array([price_return(t)*am[i] for i,t in enumerate(tick,0)])
         widgets.all_holdings_label.setText(f'US${round(np.sum(total),2)}')    
-        
+    
+    def update_port_table(self,tick, val):
+        widgets.portfolio_table.setRowCount(0)
+        print(tick)
+        for i,t in enumerate(tick,0):
+            price = price_return(t)*val[i]
+            print(val[i])
+            self.add_row(t,val[i],price)
+    
+    def add_row(self,tick,amount,price):
+        tab = widgets.portfolio_table
+        row = tab.rowCount()
+        tab.insertRow(row)
+        tab.setItem(row,0,QTableWidgetItem(tick))
+        tab.setItem(row,1,QTableWidgetItem(str(round(amount,2))))
+        tab.setItem(row,2,QTableWidgetItem(f'${price}'))
 
     def update_pie_chart(self,tick,vals):
         ax = self.pieChart.ax
