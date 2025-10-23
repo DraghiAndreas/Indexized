@@ -5,12 +5,13 @@ import pandas as pd
 import numpy as np
 import time
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHeaderView
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHeaderView, QAbstractItemView, QTableWidgetItem
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+
 
 from functionality.basic import *
 from functionality.portfolio import *
@@ -57,7 +58,20 @@ class MainWindow(QMainWindow):
         layout3 = QVBoxLayout(widgets.frame_15)
         layout3.addWidget(self.portGraph)
         widgets.frame_15.setLayout(layout3)
-        
+
+        widgets.portfolio_table.setColumnCount(3)
+        widgets.portfolio_table.setHorizontalHeaderLabels(['Ticker','Amount','Price'])
+        widgets.portfolio_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        widgets.portfolio_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        widgets.portfolio_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+
+        row = widgets.portfolio_table.rowCount()
+        widgets.portfolio_table.insertRow(row)
+
+        widgets.portfolio_table.setItem(row,0,QTableWidgetItem('VTI'))
+        widgets.portfolio_table.setItem(row,1,QTableWidgetItem('1.32'))
+        widgets.portfolio_table.setItem(row,2,QTableWidgetItem('$241'))
+
         self.portfolio_graph_update()
         self.graph_data_update()
         

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainqSjKGW.ui'
+## Form generated from reading UI file 'mainKFuNUd.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.9.3
 ##
@@ -1818,15 +1818,26 @@ class Ui_MainWindow(object):
         self.holdings_list_pie_2.setFrameShape(QFrame.Shape.StyledPanel)
         self.holdings_list_pie_2.setFrameShadow(QFrame.Shadow.Raised)
         self.horizontalLayout_37 = QHBoxLayout(self.holdings_list_pie_2)
+        self.horizontalLayout_37.setSpacing(0)
         self.horizontalLayout_37.setObjectName(u"horizontalLayout_37")
-        self.horizontalLayout_37.setContentsMargins(-1, 0, -1, 0)
+        self.horizontalLayout_37.setContentsMargins(0, 0, 0, 0)
         self.frame_20 = QFrame(self.holdings_list_pie_2)
         self.frame_20.setObjectName(u"frame_20")
         self.frame_20.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_20.setFrameShadow(QFrame.Shadow.Raised)
-        self.verticalLayout_42 = QVBoxLayout(self.frame_20)
+        self.horizontalLayout_28 = QHBoxLayout(self.frame_20)
+        self.horizontalLayout_28.setSpacing(0)
+        self.horizontalLayout_28.setObjectName(u"horizontalLayout_28")
+        self.horizontalLayout_28.setContentsMargins(0, 0, 0, 0)
+        self.frame_16 = QFrame(self.frame_20)
+        self.frame_16.setObjectName(u"frame_16")
+        self.frame_16.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_16.setFrameShadow(QFrame.Shadow.Raised)
+        self.verticalLayout_42 = QVBoxLayout(self.frame_16)
+        self.verticalLayout_42.setSpacing(6)
         self.verticalLayout_42.setObjectName(u"verticalLayout_42")
-        self.frame_21 = QFrame(self.frame_20)
+        self.verticalLayout_42.setContentsMargins(0, 6, -1, 0)
+        self.frame_21 = QFrame(self.frame_16)
         self.frame_21.setObjectName(u"frame_21")
         self.frame_21.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_21.setFrameShadow(QFrame.Shadow.Raised)
@@ -1898,7 +1909,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_42.addWidget(self.frame_21)
 
-        self.frame_23 = QFrame(self.frame_20)
+        self.frame_23 = QFrame(self.frame_16)
         self.frame_23.setObjectName(u"frame_23")
         self.frame_23.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_23.setFrameShadow(QFrame.Shadow.Raised)
@@ -1926,7 +1937,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_42.addWidget(self.frame_23)
 
-        self.frame_24 = QFrame(self.frame_20)
+        self.frame_24 = QFrame(self.frame_16)
         self.frame_24.setObjectName(u"frame_24")
         self.frame_24.setStyleSheet(u"QPushButton{\n"
 "background-color:rgb(16,16,16);\n"
@@ -1942,15 +1953,15 @@ class Ui_MainWindow(object):
 "}")
         self.frame_24.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_24.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_28 = QHBoxLayout(self.frame_24)
-        self.horizontalLayout_28.setObjectName(u"horizontalLayout_28")
+        self.horizontalLayout_35 = QHBoxLayout(self.frame_24)
+        self.horizontalLayout_35.setObjectName(u"horizontalLayout_35")
         self.add_btn = QPushButton(self.frame_24)
         self.add_btn.setObjectName(u"add_btn")
         self.add_btn.setMinimumSize(QSize(0, 30))
         self.add_btn.setCheckable(True)
         self.add_btn.setAutoExclusive(True)
 
-        self.horizontalLayout_28.addWidget(self.add_btn)
+        self.horizontalLayout_35.addWidget(self.add_btn)
 
         self.subtract_btn = QPushButton(self.frame_24)
         self.subtract_btn.setObjectName(u"subtract_btn")
@@ -1958,7 +1969,7 @@ class Ui_MainWindow(object):
         self.subtract_btn.setCheckable(True)
         self.subtract_btn.setAutoExclusive(True)
 
-        self.horizontalLayout_28.addWidget(self.subtract_btn)
+        self.horizontalLayout_35.addWidget(self.subtract_btn)
 
         self.delete_btn = QPushButton(self.frame_24)
         self.delete_btn.setObjectName(u"delete_btn")
@@ -1966,7 +1977,7 @@ class Ui_MainWindow(object):
         self.delete_btn.setCheckable(True)
         self.delete_btn.setAutoExclusive(True)
 
-        self.horizontalLayout_28.addWidget(self.delete_btn)
+        self.horizontalLayout_35.addWidget(self.delete_btn)
 
         self.reset_btn = QPushButton(self.frame_24)
         self.reset_btn.setObjectName(u"reset_btn")
@@ -1986,13 +1997,33 @@ class Ui_MainWindow(object):
         self.reset_btn.setCheckable(True)
         self.reset_btn.setAutoExclusive(True)
 
-        self.horizontalLayout_28.addWidget(self.reset_btn)
+        self.horizontalLayout_35.addWidget(self.reset_btn)
 
 
         self.verticalLayout_42.addWidget(self.frame_24)
 
-        self.verticalLayout_42.setStretch(0, 1)
-        self.verticalLayout_42.setStretch(1, 1)
+
+        self.horizontalLayout_28.addWidget(self.frame_16)
+
+        self.frame_17 = QFrame(self.frame_20)
+        self.frame_17.setObjectName(u"frame_17")
+        self.frame_17.setStyleSheet(u"background-color: transparent;")
+        self.frame_17.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_17.setFrameShadow(QFrame.Shadow.Raised)
+        self.horizontalLayout_36 = QHBoxLayout(self.frame_17)
+        self.horizontalLayout_36.setObjectName(u"horizontalLayout_36")
+        self.horizontalLayout_36.setContentsMargins(0, 0, 0, 0)
+        self.portfolio_table = QTableWidget(self.frame_17)
+        self.portfolio_table.setObjectName(u"portfolio_table")
+        self.portfolio_table.setStyleSheet(u"")
+
+        self.horizontalLayout_36.addWidget(self.portfolio_table)
+
+
+        self.horizontalLayout_28.addWidget(self.frame_17)
+
+        self.horizontalLayout_28.setStretch(0, 1)
+        self.horizontalLayout_28.setStretch(1, 1)
 
         self.horizontalLayout_37.addWidget(self.frame_20)
 
@@ -2678,7 +2709,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 274, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
