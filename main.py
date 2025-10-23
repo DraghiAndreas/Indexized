@@ -210,6 +210,16 @@ class MainWindow(QMainWindow):
             text_change.setStyleSheet('font: bold "Segoe UI"; font-size: 19px;color:#ff4143;border: none;')
         text_tick.setStyleSheet('font: bold "Segoe UI"; font-size: 19px;border:none;')
 
+
+    
+    def set_stylesheet2(self,text,val):
+        if val > 0:
+            text.setStyleSheet('font: bold "Segoe UI"; font-size: 23px;border:none; color: #2ecc71;')
+        else:
+            text.setStyleSheet('font: bold "Segoe UI"; font-size: 23px;border:none; color: #ff4143;')
+
+
+
     def subtract_stock(self):
         amount = widgets.portfolio_amount.toPlainText()
         index = widgets.portfolio_combobox.currentIndex()
@@ -287,12 +297,12 @@ class MainWindow(QMainWindow):
         wedges, texts, autotexts = ax.pie(
             vals,
             labels=tick,
-            colors = ['#2ecc71' if get_change(t)>0 else map_change_to_red(get_change(t)) for t in tick],
+            colors = [map_change(get_change(t)) for t in tick],
             explode = [0.1 if val == max(vals) else 0 for val in vals],
-            autopct='%1.1f%%',          # show percentages
-            startangle=90,              # rotate for cleaner layout
-            textprops={'color': 'white', 'fontsize': 10},  # white labels
-            wedgeprops={'edgecolor': '#14181c', 'linewidth': 1},  # clean edge
+            autopct='%1.1f%%',          
+            startangle=90,             
+            textprops={'color': 'white', 'fontsize': 10},  
+            wedgeprops={'edgecolor': '#14181c', 'linewidth': 1},
             radius=2
         )
 
@@ -332,7 +342,12 @@ class MainWindow(QMainWindow):
 
             widgets.price_ago_text.setText(f'Price {self.graph_period_port} ago:')
             widgets.price_ago_label.setText(f'${start}')
-            widgets.period_change.setText(f'+${change}({percent}%)')
+            
+            if change > 0:
+                widgets.period_change.setText(f'+${change}({percent}%)')
+            else:
+                widgets.period_change.setText(f'-${abs(change)}({percent}%)')
+            self.set_stylesheet2(widgets.period_change,change)
 
             self.graph_creatoraa(self.portGraph,total_values,change,dates)
         else:

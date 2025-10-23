@@ -56,23 +56,35 @@ def hist(ticker,p):
 def graph_color(p):
     return '#d60a22' if p<0 else '#056354'
 
-def map_change_to_red(change):
-    # clamp change to a max of -13
-    change = max(change, -13)
+def map_change(change):
+    
+    if change >= 0:
+        change = min(change, 15)
+        if change <= 1:
+            start, end = (156,204,153), (126,204,123)
+            frac = (change / 1)
+        elif change <= 5:
+            start, end = (126,204,123), (106,190,103)
+            frac = (change - 1) / (5 - 1)
+        elif change <= 15:
+            start, end = (106,190,103), (80,160,80)
+            frac = (change - 5) / (15 - 5)
+        else:
+            return (80/255,160/255,80/255)
+    else:    
+        change = max(change, -15)
+        if change >= -0.5:
+            start, end = (205,115,117), (225,95,97)
+            frac = (abs(change) / 0.5)
+        elif change >= -3:
+            start, end = (225,95,97), (255,45,47)
+            frac = (abs(change) - 0.5) / (3 - 0.5)
+        elif change >= -15:
+            start, end = (255,45,47), (140,0,0)
+            frac = (abs(change) - 3) / (15 - 3)
+        else:
+            return (130/255,0,0)
 
-    if change <= -0.5:
-        start, end = (205,115,117), (225,95,97)
-        frac = (abs(change) / 0.5)
-    elif change <= -3:
-        start, end = (225,95,97), (255,45,47)
-        frac = (abs(change) - 0.5) / (3 - 0.5)
-    elif change <= -13:
-        start, end = (255,45,47), (140,0,0)
-        frac = (abs(change) - 3) / (13 - 3)
-    else:
-        return (130/255,0,0)
-
-    # interpolate each channel
     r = float(start[0] + frac * (end[0] - start[0]))
     g = float(start[1] + frac * (end[1] - start[1]))
     b = float(start[2] + frac * (end[2] - start[2]))
@@ -152,40 +164,3 @@ def random_quote():
          'I put myself in the way of things happening, and they happened'
          ]
     return random.choice(l)
-
-
-def graph_creator(prices,change,dates,title):
-    fig, ax = plt.subplots(figsize = (12,4))
-    x_axis = range(len(prices))
-    fig.patch.set_facecolor('#14181c')
-    ax.set_facecolor('#14181c')
-    for spine in ax.spines.values():
-        spine.set_edgecolor('#14181c')
-    ax.grid(axis='y',color = '#252b30')
-    ax.plot(prices, color = graph_color(change))
-    ax.tick_params(axis='both',color = '#14181c')
-    ax.fill_between(x_axis,prices,min(prices),color = graph_color(change),alpha = 0.3)
-    ax.set_title(title, color="#FFFFFF", weight='bold')
-    plt.ylabel('USD$',color = "#FFFFFF")
-    plt.xticks(x_axis,labels=dates, color = "#FFFFFF")
-    plt.yticks(color = "#FFFFFF")
-    plt.show()
-
-def graph_creator2(nr,prices,dates,title,names):
-    print('right')
-    fig, ax = plt.subplots(figsize = (12,4))
-    x_axis = range(len(prices[0]))
-    fig.patch.set_facecolor('#14181c')
-    ax.set_facecolor('#14181c')
-    for spine in ax.spines.values():
-        spine.set_edgecolor('#14181c')
-    ax.grid(axis='y',color = '#252b30')
-    for i,price in enumerate(prices):
-        ax.plot(price, label = names[i])
-    ax.tick_params(axis='both',color = '#14181c')
-    ax.set_title(title, color="#FFFFFF", weight='bold')
-    ax.legend(loc = 'upper left', facecolor = '#14181c', labelcolor = "#FFFFFF")
-    plt.ylabel('USD$',color = "#FFFFFF")
-    plt.xticks(x_axis,labels=dates, color = "#FFFFFF")
-    plt.yticks(color = "#FFFFFF")
-    plt.show()
