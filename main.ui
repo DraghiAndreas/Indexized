@@ -627,34 +627,6 @@ Button */
             <property name="frameShadow">
              <enum>QFrame::Shadow::Raised</enum>
             </property>
-            <widget class="QFrame" name="topLogo">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>5</y>
-               <width>42</width>
-               <height>42</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>42</width>
-               <height>42</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>42</width>
-               <height>42</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::Shape::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Shadow::Raised</enum>
-             </property>
-            </widget>
             <widget class="QLabel" name="titleLeftApp">
              <property name="geometry">
               <rect>
@@ -673,7 +645,7 @@ Button */
               </font>
              </property>
              <property name="text">
-              <string>PyDracula</string>
+              <string>Menu</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
@@ -703,7 +675,7 @@ Button */
               </font>
              </property>
              <property name="text">
-              <string>Modern GUI / Flat Style</string>
+              <string>Portfolio-total : 0$</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
@@ -725,7 +697,7 @@ Button */
             <property name="frameShadow">
              <enum>QFrame::Shadow::Raised</enum>
             </property>
-            <layout class="QVBoxLayout" name="verticalMenuLayout">
+            <layout class="QVBoxLayout" name="verticalMenuLayout" stretch="0,0,0">
              <property name="spacing">
               <number>0</number>
              </property>
@@ -902,10 +874,11 @@ Button */
                    <enum>Qt::LayoutDirection::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/cil-gamepad.png);</string>
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-chart.png);
+</string>
                   </property>
                   <property name="text">
-                   <string>Widgets</string>
+                   <string>Stock Tracker</string>
                   </property>
                  </widget>
                 </item>
@@ -938,10 +911,10 @@ Button */
                    <enum>Qt::LayoutDirection::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/cil-file.png);</string>
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-briefcase.png);</string>
                   </property>
                   <property name="text">
-                   <string>New</string>
+                   <string>Portfolio</string>
                   </property>
                  </widget>
                 </item>
@@ -974,15 +947,15 @@ Button */
                    <enum>Qt::LayoutDirection::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/cil-save.png)</string>
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-magnifying-glass.png);</string>
                   </property>
                   <property name="text">
-                   <string>Save</string>
+                   <string>Asset Library</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="btn_exit">
+                 <widget class="QPushButton" name="btn_info">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                     <horstretch>0</horstretch>
@@ -1010,10 +983,10 @@ Button */
                    <enum>Qt::LayoutDirection::LeftToRight</enum>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/cil-x.png);</string>
+                   <string notr="true">background-image: url(:/icons/images/icons/cil-mug.png);</string>
                   </property>
                   <property name="text">
-                   <string>Exit</string>
+                   <string>Info</string>
                   </property>
                  </widget>
                 </item>
@@ -1022,6 +995,12 @@ Button */
              </item>
              <item alignment="Qt::AlignmentFlag::AlignBottom">
               <widget class="QFrame" name="bottomMenu">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="frameShape">
                 <enum>QFrame::Shape::NoFrame</enum>
                </property>
@@ -1044,42 +1023,6 @@ Button */
                 <property name="bottomMargin">
                  <number>0</number>
                 </property>
-                <item>
-                 <widget class="QPushButton" name="toggleLeftBox">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>45</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Segoe UI</family>
-                    <pointsize>10</pointsize>
-                    <italic>false</italic>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="layoutDirection">
-                   <enum>Qt::LayoutDirection::LeftToRight</enum>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/icon_settings.png);</string>
-                  </property>
-                  <property name="text">
-                   <string>Left Box</string>
-                  </property>
-                 </widget>
-                </item>
                </layout>
               </widget>
              </item>
@@ -1209,7 +1152,7 @@ Button */
                   </size>
                  </property>
                  <property name="text">
-                  <string>Left Box</string>
+                  <string>Settings</string>
                  </property>
                 </widget>
                </item>
@@ -3146,10 +3089,16 @@ border-color: #363f44;</string>
                                    <enum>QFrame::Shadow::Raised</enum>
                                   </property>
                                   <layout class="QHBoxLayout" name="horizontalLayout_37" stretch="2">
+                                   <property name="spacing">
+                                    <number>0</number>
+                                   </property>
                                    <property name="leftMargin">
                                     <number>0</number>
                                    </property>
                                    <property name="topMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="rightMargin">
                                     <number>0</number>
                                    </property>
                                    <property name="bottomMargin">
@@ -3163,11 +3112,17 @@ border-color: #363f44;</string>
                                      <property name="frameShadow">
                                       <enum>QFrame::Shadow::Raised</enum>
                                      </property>
-                                     <layout class="QHBoxLayout" name="horizontalLayout_28" stretch="5,2">
+                                     <layout class="QHBoxLayout" name="horizontalLayout_28" stretch="1,1">
+                                      <property name="spacing">
+                                       <number>0</number>
+                                      </property>
                                       <property name="leftMargin">
                                        <number>0</number>
                                       </property>
                                       <property name="topMargin">
+                                       <number>0</number>
+                                      </property>
+                                      <property name="rightMargin">
                                        <number>0</number>
                                       </property>
                                       <property name="bottomMargin">
@@ -3182,6 +3137,9 @@ border-color: #363f44;</string>
                                          <enum>QFrame::Shadow::Raised</enum>
                                         </property>
                                         <layout class="QVBoxLayout" name="verticalLayout_42">
+                                         <property name="spacing">
+                                          <number>6</number>
+                                         </property>
                                          <property name="leftMargin">
                                           <number>0</number>
                                          </property>
@@ -3568,7 +3526,7 @@ background-color:rgb(255,145,147);
 }</string>
                                               </property>
                                               <property name="text">
-                                               <string>RESET PORT</string>
+                                               <string>RESET</string>
                                               </property>
                                               <property name="checkable">
                                                <bool>true</bool>
@@ -3586,6 +3544,9 @@ background-color:rgb(255,145,147);
                                       </item>
                                       <item>
                                        <widget class="QFrame" name="frame_17">
+                                        <property name="styleSheet">
+                                         <string notr="true">background-color: transparent;</string>
+                                        </property>
                                         <property name="frameShape">
                                          <enum>QFrame::Shape::StyledPanel</enum>
                                         </property>
@@ -3593,8 +3554,24 @@ background-color:rgb(255,145,147);
                                          <enum>QFrame::Shadow::Raised</enum>
                                         </property>
                                         <layout class="QHBoxLayout" name="horizontalLayout_36">
+                                         <property name="leftMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="topMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="rightMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="bottomMargin">
+                                          <number>0</number>
+                                         </property>
                                          <item>
-                                          <widget class="QTableWidget" name="portfoli_table"/>
+                                          <widget class="QTableWidget" name="portfolio_table">
+                                           <property name="styleSheet">
+                                            <string notr="true">background-color:transparent;</string>
+                                           </property>
+                                          </widget>
                                          </item>
                                         </layout>
                                        </widget>

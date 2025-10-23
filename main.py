@@ -131,7 +131,6 @@ class MainWindow(QMainWindow):
 
         def openCloseLeftBox():
             UIFunctions.toggleLeftBox(self, True)
-        widgets.toggleLeftBox.clicked.connect(openCloseLeftBox)
         widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
 
         def openCloseRightBox():
@@ -304,7 +303,6 @@ class MainWindow(QMainWindow):
         print(tick)
         for i,t in enumerate(tick,0):
             price = price_return(t)*val[i]
-            print(val[i])
             self.add_row(t,val[i],price)
     
     def add_row(self,tick,amount,price):
@@ -322,7 +320,7 @@ class MainWindow(QMainWindow):
         fig.patch.set_facecolor('#14181c')
         ax.set_facecolor('#14181c')
 
-        wedges, texts, autotexts = ax.pie(
+        ax.pie(
             vals,
             labels=tick,
             colors = [map_change(get_change(t)) for t in tick],
@@ -500,11 +498,13 @@ class MainWindow(QMainWindow):
         if btnName == "btn_new":
             widgets.stackedWidget.setCurrentWidget(widgets.portfolio) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
+            print(btn.styleSheet())
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "btn_save":
             widgets.stackedWidget.setCurrentWidget(widgets.funds)
             UIFunctions.resetStyle(self, btnName)
+            print(btn.styleSheet())
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         print(f'Button "{btnName}" pressed!')

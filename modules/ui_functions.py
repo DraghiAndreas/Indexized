@@ -94,31 +94,32 @@ class UIFunctions(MainWindow):
         if enable:
             # GET WIDTH
             width = self.ui.extraLeftBox.width()
-            widthRightBox = self.ui.extraRightBox.width()
+            #widthRightBox = self.ui.extraRightBox.width()
             maxExtend = Settings.LEFT_BOX_WIDTH
             color = Settings.BTN_LEFT_BOX_COLOR
             standard = 0
 
             # GET BTN STYLE
-            style = self.ui.toggleLeftBox.styleSheet()
+            #style = self.ui.toggleLeftBox.styleSheet()
 
             # SET MAX WIDTH
             if width == 0:
                 widthExtended = maxExtend
                 # SELECT BTN
-                self.ui.toggleLeftBox.setStyleSheet(style + color)
-                if widthRightBox != 0:
-                    style = self.ui.settingsTopBtn.styleSheet()
-                    self.ui.settingsTopBtn.setStyleSheet(style.replace(Settings.BTN_RIGHT_BOX_COLOR, ''))
+                #self.ui.toggleLeftBox.setStyleSheet(style + color)
+                #if widthRightBox != 0:
+                 #   style = self.ui.settingsTopBtn.styleSheet()
+                  #  self.ui.settingsTopBtn.setStyleSheet(style.replace(Settings.BTN_RIGHT_BOX_COLOR, ''))
             else:
                 widthExtended = standard
                 # RESET BTN
-                self.ui.toggleLeftBox.setStyleSheet(style.replace(color, ''))
+                #self.ui.toggleLeftBox.setStyleSheet(style.replace(color, ''))
                 
-        UIFunctions.start_box_animation(self, width, widthRightBox, "left")
+        UIFunctions.start_box_animation(self, width, "left")
 
     # TOGGLE RIGHT BOX
     # ///////////////////////////////////////////////////////////////
+    '''
     def toggleRightBox(self, enable):
         if enable:
             # GET WIDTH
@@ -145,9 +146,8 @@ class UIFunctions(MainWindow):
                 self.ui.settingsTopBtn.setStyleSheet(style.replace(color, ''))
 
             UIFunctions.start_box_animation(self, widthLeftBox, width, "right")
-
-    def start_box_animation(self, left_box_width, right_box_width, direction):
-        right_width = 0
+    '''
+    def start_box_animation(self, left_box_width, direction):
         left_width = 0 
 
         # Check values
@@ -156,10 +156,12 @@ class UIFunctions(MainWindow):
         else:
             left_width = 0
         # Check values
+        '''
         if right_box_width == 0 and direction == "right":
             right_width = 240
         else:
             right_width = 0       
+        '''
 
         # ANIMATION LEFT BOX        
         self.left_box = QPropertyAnimation(self.ui.extraLeftBox, b"minimumWidth")
@@ -167,18 +169,18 @@ class UIFunctions(MainWindow):
         self.left_box.setStartValue(left_box_width)
         self.left_box.setEndValue(left_width)
         self.left_box.setEasingCurve(QEasingCurve.InOutQuart)
-
+        '''
         # ANIMATION RIGHT BOX        
         self.right_box = QPropertyAnimation(self.ui.extraRightBox, b"minimumWidth")
         self.right_box.setDuration(Settings.TIME_ANIMATION)
         self.right_box.setStartValue(right_box_width)
         self.right_box.setEndValue(right_width)
         self.right_box.setEasingCurve(QEasingCurve.InOutQuart)
-
+        '''
         # GROUP ANIMATION
         self.group = QParallelAnimationGroup()
         self.group.addAnimation(self.left_box)
-        self.group.addAnimation(self.right_box)
+        #self.group.addAnimation(self.right_box)
         self.group.start()
 
     # SELECT/DESELECT MENU
