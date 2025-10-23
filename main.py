@@ -64,13 +64,11 @@ class MainWindow(QMainWindow):
         widgets.portfolio_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         widgets.portfolio_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         widgets.portfolio_table.setSelectionBehavior(QAbstractItemView.SelectRows)
+        widgets.portfolio_table.verticalHeader().setVisible(False)
 
         row = widgets.portfolio_table.rowCount()
         widgets.portfolio_table.insertRow(row)
-
-        widgets.portfolio_table.setItem(row,0,QTableWidgetItem('VTI'))
-        widgets.portfolio_table.setItem(row,1,QTableWidgetItem('1.32'))
-        widgets.portfolio_table.setItem(row,2,QTableWidgetItem('$241'))
+        
 
         self.portfolio_graph_update()
         self.graph_data_update()
@@ -315,7 +313,7 @@ class MainWindow(QMainWindow):
         tab.insertRow(row)
         tab.setItem(row,0,QTableWidgetItem(tick))
         tab.setItem(row,1,QTableWidgetItem(str(round(amount,2))))
-        tab.setItem(row,2,QTableWidgetItem(f'${price}'))
+        tab.setItem(row,2,QTableWidgetItem(f'${round(price,2)}'))
 
     def update_pie_chart(self,tick,vals):
         ax = self.pieChart.ax
