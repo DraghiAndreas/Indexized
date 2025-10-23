@@ -37,18 +37,49 @@ def tick_full(tick):
 }
     return d[tick]
 
+def hist(ticker,p):
 
-def price_return(t):
-    return yf.Ticker(t).info['regularMarketPrice']
+    ticker = yf.Ticker(ticker)
+    print(period_to_interval(p))
+    pand = ticker.history(period=p,interval = period_to_interval(p))
+    prices = pand['Close'].round(2).tolist()
+    print(prices)
+    start = prices[0]
+    end = prices[-1]
+    change = round(end - start, 2)
+    percent = round((change / start) * 100, 2)
+    return start,end,change,percent,prices
+
+#def price_return(t):
+#    return yf.Ticker(t).info['regularMarketPrice']
 
 def graph_color(p):
     return '#d60a22' if p<0 else '#056354'
 
-def yes_no(inp):
-    return True if inp.lower().strip() == 'yes' else False
+def map_change_to_red(change):
+    # clamp change to a max of -13
+    change = max(change, -13)
 
-def color(p):
-    return Fore.RED if p<0 else Fore.GREEN
+    if change <= -0.5:
+        start, end = (205,115,117), (225,95,97)
+        frac = (abs(change) / 0.5)
+    elif change <= -3:
+        start, end = (225,95,97), (255,45,47)
+        frac = (abs(change) - 0.5) / (3 - 0.5)
+    elif change <= -13:
+        start, end = (255,45,47), (140,0,0)
+        frac = (abs(change) - 3) / (13 - 3)
+    else:
+        return (130/255,0,0)
+
+    # interpolate each channel
+    r = float(start[0] + frac * (end[0] - start[0]))
+    g = float(start[1] + frac * (end[1] - start[1]))
+    b = float(start[2] + frac * (end[2] - start[2]))
+
+    return (r/255,g/255,b/255)
+
+    
 
 def period_to_interval(period):
     periods = ['1d','5d','1mo','6mo','ytd','1y','5y','max']

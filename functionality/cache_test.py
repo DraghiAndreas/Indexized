@@ -2,6 +2,7 @@ from datetime import date
 
 import sqlite3
 import yfinance as yf
+import numpy as np
 
 current_date = date.today()
 
@@ -44,7 +45,7 @@ def cache():
 
     tickers_str = "VTI SPY VOO SCHB VXUS IXUS VEU BND AGG XLK VNQ DIA QQQ XLF XLE XLY XLI XLV XLC XLU XLB XLRE VIXY SH SQQQ ARKK SOXX EURUSD=X JPYUSD=X GBPUSD=X CNYUSD=X CHFUSD=X"
     data = yf.download(tickers_str, period="1y", interval="1mo")
-    data5 = yf.download(tickers_str,period="5d",interval="1d")
+    data5 = yf.download(tickers_str,period="5d",interval="15m")
 
     with sqlite3.connect('cache.sql') as conn:
         c=conn.cursor()
@@ -57,23 +58,26 @@ def cache():
                 change5 REAL
                 )
             """)
-        for ticker in tickers_str.split():
-            if ticker in ('GBPUSD=X','EURUSD=X','JPYUSD=X','CNYUSD=X','CHFUSD=X'):
+        for tick in tickers_str.split():
+            if tick in ('GBPUSD=X','EURUSD=X','JPYUSD=X','CNYUSD=X','CHFUSD=X'):
                 rnd = 4
             else:
                 rnd = 2
-            closes = data['Close'][ticker].dropna()
-            start_price = closes.iloc[0]
-            end_price = closes.iloc[-1]
-            pct_change = ((end_price - start_price) / start_price) * 100
-            closes5 = data5['Close'][ticker].dropna()
-            start_price5 = closes5.iloc[0]
-            pct_change5 = ((end_price - start_price5) / start_price5) * 100
-            change5 = end_price-start_price5
-            print(f'{ticker} |sp {start_price} |ep {end_price} |ep5 {start_price5} |pc {pct_change} |pc5 {pct_change5}')
-            c.execute("INSERT OR REPLACE INTO user_cache(ticker,pct,last_price, day_5,change5) VALUES (?,?,?,?,?)",(ticker,round(pct_change,rnd),round(end_price,rnd),round(pct_change5,rnd),round(change5,rnd)))
-        print('-DATA CACHED SUCCESSFULLY-')
-        input('Wait for answer')
 
+            closes = data['Close'][tick].dropna().to_numpy()
+
+            start = closes[0]
+            end = closes[-1]
+
+            pct_change = ((end - start) / start) * 100
+
+            closes5 = data5['Close'][tick].dropna().to_numpy()
+            start5 = closes5[0]
+
+            pct_change5 = ((end - start5) / start5) * 100
+            change5 = end-start5
+            print(f'{tick} | start : {start} | end : {end} | percent (last year) : {pct_change} | start (5 days): {start5} | change (5 days) : {change5} | percent (5 days) : {pct_change5}')
+            c.execute("INSERT OR REPLACE INTO user_cache(ticker,pct,last_price, day_5,change5) VALUES (?,?,?,?,?)",(tick,round(pct_change,rnd),round(end,rnd),round(pct_change5,rnd),round(change5,rnd)))
+        print('-DATA CACHED SUCCESSFULLY-')
 
 cache()

@@ -1,6 +1,9 @@
 import sys
 import os
 import platform
+import pandas as pd
+import numpy as np
+import time
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHeaderView
 from PySide6.QtGui import QIcon
@@ -9,7 +12,6 @@ from PySide6.QtCore import Qt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 
-from functionality.project import hist
 from functionality.basic import *
 from functionality.portfolio import *
 from functionality.cache_test import *
@@ -35,15 +37,28 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
 
+        cache()
+        self.graph_period = '1mo'
+        self.graph_period_port = '1mo'
+        self.graph_tick = 'VTI'
 
         self.canvas = MplCanvas(widgets.graph_frame, 5,4,100)
         layout = QVBoxLayout(widgets.graph_frame)
         layout.addWidget(self.canvas)
         widgets.graph_frame.setLayout(layout)
 
-        self.graph_period = '1mo'
-        self.graph_tick = 'VTI'
+        check()
+        self.pieChart = MplCanvas(widgets.holdings_pie_chart,5,4,100)
+        layout2 = QVBoxLayout(widgets.holdings_pie_chart)
+        layout2.addWidget(self.pieChart)
+        widgets.holdings_pie_chart.setLayout(layout2)
 
+        self.portGraph=MplCanvas(widgets.frame_15,5,4,100)
+        layout3 = QVBoxLayout(widgets.frame_15)
+        layout3.addWidget(self.portGraph)
+        widgets.frame_15.setLayout(layout3)
+        
+        self.portfolio_graph_update()
         self.graph_data_update()
         
         n = get_username()
@@ -87,16 +102,19 @@ class MainWindow(QMainWindow):
         widgets.g_ytd.clicked.connect(self.buttonGraph)
         widgets.graph_combo_box.currentIndexChanged.connect(self.combo_changed)
 
-        widgets.hg_1d.clicked.connect(self.buttonGraph)
-        widgets.hg_1mo.clicked.connect(self.buttonGraph)
-        widgets.hg_1y.clicked.connect(self.buttonGraph)
-        widgets.hg_5d.clicked.connect(self.buttonGraph)
-        widgets.hg_6mo.clicked.connect(self.buttonGraph)
-        widgets.hg_ytd.clicked.connect(self.buttonGraph)
+        widgets.hg_1d.clicked.connect(self.button_graph_port)
+        widgets.hg_1mo.clicked.connect(self.button_graph_port)
+        widgets.hg_1y.clicked.connect(self.button_graph_port)
+        widgets.hg_5d.clicked.connect(self.button_graph_port)
+        widgets.hg_6mo.clicked.connect(self.button_graph_port)
+        widgets.hg_ytd.clicked.connect(self.button_graph_port)
 
         widgets.save_username_btn.clicked.connect(self.saveUsername)
 
-
+        widgets.add_btn.clicked.connect(self.add_stock)
+        widgets.subtract_btn.clicked.connect(self.subtract_stock)
+        widgets.delete_btn.clicked.connect(self.delete_stock)
+        widgets.reset_btn.clicked.connect(self.reset_port)
 
 
         def openCloseLeftBox():
@@ -106,7 +124,7 @@ class MainWindow(QMainWindow):
 
         def openCloseRightBox():
             UIFunctions.toggleRightBox(self, True)
-        widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
+        widgets.settingsTopBtn.clicked.connect(openCloseLeftBox)
 
         self.show()
 
@@ -122,18 +140,21 @@ class MainWindow(QMainWindow):
         else:
             self.username = user
             self.updateUsername()
-            save_user(user)
-        
+            save_user(user)        
     
     def updateUsername(self):
         text = 'Welcome, '+ self.username +'!' 
         widgets.welcome_label.setText(text)
 
-
     def buttonGraph(self):
         text = self.sender().objectName()[2:] #GRABBING JUST THE PERIOD FROM THE NAME
         self.graph_period = text
         self.graph_data_update()
+
+    def button_graph_port(self):
+        text = self.sender().objectName()[3:]
+        self.graph_period_port = text
+        self.portfolio_graph_update()
 
     def updateTop5(self):
         l_asc = get_top_5(1)
@@ -189,6 +210,155 @@ class MainWindow(QMainWindow):
             text_change.setStyleSheet('font: bold "Segoe UI"; font-size: 19px;color:#ff4143;border: none;')
         text_tick.setStyleSheet('font: bold "Segoe UI"; font-size: 19px;border:none;')
 
+    def subtract_stock(self):
+        amount = widgets.portfolio_amount.toPlainText()
+        index = widgets.portfolio_combobox.currentIndex()
+        tick = widgets.portfolio_combobox.itemText(index)
+        try:
+            amount = float(amount)
+            if amount < 0:
+                print(f'{amount} is a NEGATIVE number, it will be interpreted as {abs(amount)}')
+                amount = abs(amount)
+        except ValueError:
+            print('Amount is not valid!')
+            return
+        if tick == '-------':
+            print('Select one of the valid TICKERS!')
+            return        
+        subtract(tick,amount)
+        self.portfolio_graph_update()
+
+    def add_stock(self):
+        amount = widgets.portfolio_amount.toPlainText()
+        index = widgets.portfolio_combobox.currentIndex()
+        tick = widgets.portfolio_combobox.itemText(index)
+        try:
+            amount = float(amount)
+            if amount < 0:
+                print(f'{amount} is a NEGATIVE number, it will be interpreted as {abs(amount)}')
+                amount = abs(amount)
+        except ValueError:
+            print('Amount is not valid!')
+            return
+        if tick == '-------':
+            print('Select one of the valid TICKERS!')
+            return
+        add_one(tick, amount)
+        self.portfolio_graph_update()
+
+    def delete_stock(self):
+        index = widgets.portfolio_combobox.currentIndex()
+        tick = widgets.portfolio_combobox.itemText(index)
+        if tick == '-------':
+            print('Select one of the valid TICKERS!')
+            return        
+        delete_one(tick)
+        self.portfolio_graph_update()
+    
+    def reset_port(self):
+        reset()
+        check()
+        self.portfolio_graph_update()
+
+    def portfolio_graph_update(self):
+        all = np.array(get_all())
+        if all.size:
+            tick = all[:,0]
+            val = all[:,1].astype(float)
+        else:
+            tick = np.array([])
+            val = np.array([])
+        self.update_pie_chart(tick,val)
+        self.update_total(tick,val)
+        self.update_portfolio_graph(tick,val)
+    
+    def update_total(self,tick, am):
+        total = np.array([price_return(t)*am[i] for i,t in enumerate(tick,0)])
+        widgets.all_holdings_label.setText(f'US${round(np.sum(total),2)}')    
+        
+
+    def update_pie_chart(self,tick,vals):
+        ax = self.pieChart.ax
+        fig = self.pieChart.fig
+        ax.clear()
+        fig.patch.set_facecolor('#14181c')
+        ax.set_facecolor('#14181c')
+
+        wedges, texts, autotexts = ax.pie(
+            vals,
+            labels=tick,
+            colors = ['#2ecc71' if get_change(t)>0 else map_change_to_red(get_change(t)) for t in tick],
+            explode = [0.1 if val == max(vals) else 0 for val in vals],
+            autopct='%1.1f%%',          # show percentages
+            startangle=90,              # rotate for cleaner layout
+            textprops={'color': 'white', 'fontsize': 10},  # white labels
+            wedgeprops={'edgecolor': '#14181c', 'linewidth': 1},  # clean edge
+            radius=2
+        )
+
+        ax.set_title("Portfolio Holdings", color='white', fontsize=13, pad=20, weight='bold')
+
+        ax.axis('equal')
+
+        self.pieChart.draw()
+
+    def update_portfolio_graph(self,tickers,amounts):
+        total_values = None
+        first = True
+        interval = period_to_interval(self.graph_period_port)
+        for ticker_name, amount in zip(tickers, amounts):
+            ticker = yf.Ticker(ticker_name)
+            hist = ticker.history(period=self.graph_period_port, interval=interval)
+            if first:
+                print('Entered LOOP')
+                dates = date_selector(hist,self.graph_period_port)
+                first = False
+
+            closes = hist['Close'].round(2)
+
+            values = closes * amount
+
+            if total_values is None:
+                total_values = values
+            else:
+                total_values = total_values.add(values, fill_value=0)
+        print('Exit loop')
+        if total_values is not None and not total_values.empty:
+            total_values = total_values.to_numpy()
+            start = round(total_values[0],2)
+            end = total_values[-1]
+            change = round(end - start, 2)
+            percent = round((change / start) * 100, 2)
+
+            widgets.price_ago_text.setText(f'Price {self.graph_period_port} ago:')
+            widgets.price_ago_label.setText(f'${start}')
+            widgets.period_change.setText(f'+${change}({percent}%)')
+
+            self.graph_creatoraa(self.portGraph,total_values,change,dates)
+        else:
+            ax = self.portGraph.ax
+            fig = self.portGraph.fig
+
+            ax.clear()
+            fig.patch.set_facecolor('#14181c')
+            ax.set_facecolor('#14181c')
+
+            for spine in ax.spines.values():
+                spine.set_edgecolor('#14181c')
+
+            ax.grid(axis='y', color='#252b30')
+
+            ax.tick_params(axis='both',color = '#14181c')
+            ax.set_ylabel('USD$', color="#FFFFFF")
+            ax.set_xticklabels([])
+            ax.set_yticklabels([])
+
+            self.portGraph.draw()
+
+            widgets.price_ago_text.setText(f'Price {self.graph_period_port} ago:')
+            widgets.price_ago_label.setText(f'$0')
+            widgets.period_change.setText(f'+$0(0%)')
+    
     def combo_changed(self, index):
         text = widgets.graph_combo_box.itemText(index)
         if text != '-------':
@@ -230,7 +400,9 @@ class MainWindow(QMainWindow):
         change = round(end - start, 2)
         percent = round((change / start) * 100, 2)
 
-        self.graph_creatoraa(prices,change,dates)
+        print(f'{self.graph_tick} : start : {start} | end : {end} | change : {change} | percent : {percent}')
+
+        self.graph_creatoraa(self.canvas,prices,change,dates)
         if change > 0:
             widgets.g_change_label.setStyleSheet('color: #2ecc71;font-size: 18px;font: bold "Segoe UI";')
             change = '+'+str(change)
@@ -241,9 +413,9 @@ class MainWindow(QMainWindow):
         widgets.g_change_label.setText(f'{change}$ ({percent}%)')
         widgets.g_name_label.setText(tick_full(self.graph_tick))
 
-    def graph_creatoraa(self, prices, change, dates):
-        ax = self.canvas.ax
-        fig = self.canvas.fig
+    def graph_creatoraa(self,canvas, prices, change, dates):
+        ax = canvas.ax
+        fig = canvas.fig
 
         ax.clear()
 
@@ -264,7 +436,7 @@ class MainWindow(QMainWindow):
         ax.set_xticklabels(dates, color="#FFFFFF")
         ax.set_yticklabels(ax.get_yticks(), color="#FFFFFF")  # fixed typo
 
-        self.canvas.draw()  # update the canvas
+        canvas.draw()  # update the canvas
 
     def buttonClick(self):
         btn = self.sender()
@@ -293,7 +465,6 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         print(f'Button "{btnName}" pressed!')
-
 
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)

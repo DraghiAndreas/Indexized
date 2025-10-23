@@ -2540,7 +2540,7 @@ border: 1px solid #ff4143;
                                    <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 20px;</string>
                                   </property>
                                   <property name="text">
-                                   <string>CURRENCIES</string>
+                                   <string>CURRENCIES (USD TO ...)</string>
                                   </property>
                                  </widget>
                                 </item>
@@ -2749,7 +2749,7 @@ border: 1px solid #ff4143;
                       <property name="styleSheet">
                        <string/>
                       </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_33" stretch="1,1,15,1">
+                      <layout class="QVBoxLayout" name="verticalLayout_33" stretch="1,1,10">
                        <property name="spacing">
                         <number>3</number>
                        </property>
@@ -2786,7 +2786,8 @@ border: 1px solid #ff4143;
                            <widget class="QFrame" name="separator_4">
                             <property name="styleSheet">
                              <string notr="true">QFrame {
-    border:2px solid white; 
+    border:11px solid;
+	border-color: #363f44;
 }</string>
                             </property>
                             <property name="frameShape">
@@ -2840,17 +2841,17 @@ border: 1px solid #ff4143;
                               <number>3</number>
                              </property>
                              <item>
-                              <widget class="QLabel" name="text_label_2">
+                              <widget class="QLabel" name="price_ago_text">
                                <property name="styleSheet">
                                 <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 13px;</string>
                                </property>
                                <property name="text">
-                                <string>TextLabel</string>
+                                <string>Price __ ago: </string>
                                </property>
                               </widget>
                              </item>
                              <item>
-                              <widget class="QLabel" name="hd_1_label">
+                              <widget class="QLabel" name="price_ago_label">
                                <property name="styleSheet">
                                 <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 24px;</string>
                                </property>
@@ -2881,17 +2882,17 @@ border: 1px solid #ff4143;
                               <number>3</number>
                              </property>
                              <item>
-                              <widget class="QLabel" name="text_label_3">
+                              <widget class="QLabel" name="period_change_text">
                                <property name="styleSheet">
                                 <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 13px;</string>
                                </property>
                                <property name="text">
-                                <string>TextLabel</string>
+                                <string>Period Change:</string>
                                </property>
                               </widget>
                              </item>
                              <item>
-                              <widget class="QLabel" name="hd_2_label">
+                              <widget class="QLabel" name="period_change">
                                <property name="styleSheet">
                                 <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 23px;color:#2ecc71</string>
                                </property>
@@ -2916,31 +2917,11 @@ border: 1px solid #ff4143;
                               <number>0</number>
                              </property>
                              <property name="topMargin">
-                              <number>3</number>
+                              <number>0</number>
                              </property>
                              <property name="bottomMargin">
-                              <number>3</number>
+                              <number>0</number>
                              </property>
-                             <item>
-                              <widget class="QLabel" name="text_label_4">
-                               <property name="styleSheet">
-                                <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 13px;</string>
-                               </property>
-                               <property name="text">
-                                <string>TextLabel</string>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QLabel" name="hd_3_label">
-                               <property name="styleSheet">
-                                <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 24px;color:#ff4143</string>
-                               </property>
-                               <property name="text">
-                                <string>TextLabel</string>
-                               </property>
-                              </widget>
-                             </item>
                             </layout>
                            </widget>
                           </item>
@@ -2958,33 +2939,45 @@ border: 1px solid #ff4143;
                         </widget>
                        </item>
                        <item>
-                        <widget class="QFrame" name="holdings_graph">
+                        <widget class="QFrame" name="frame_14">
                          <property name="frameShape">
                           <enum>QFrame::Shape::StyledPanel</enum>
                          </property>
                          <property name="frameShadow">
                           <enum>QFrame::Shadow::Raised</enum>
                          </property>
-                         <layout class="QVBoxLayout" name="verticalLayout_38" stretch="2,10">
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
+                         <layout class="QHBoxLayout" name="horizontalLayout_34" stretch="6,3">
                           <item>
-                           <widget class="QFrame" name="hg_buttons">
-                            <property name="sizePolicy">
-                             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                              <horstretch>0</horstretch>
-                              <verstretch>0</verstretch>
-                             </sizepolicy>
+                           <widget class="QFrame" name="holdings_graph">
+                            <property name="frameShape">
+                             <enum>QFrame::Shape::StyledPanel</enum>
                             </property>
-                            <property name="minimumSize">
-                             <size>
-                              <width>0</width>
-                              <height>0</height>
-                             </size>
+                            <property name="frameShadow">
+                             <enum>QFrame::Shadow::Raised</enum>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">QPushButton{
+                            <layout class="QVBoxLayout" name="verticalLayout_38" stretch="0,0">
+                             <property name="topMargin">
+                              <number>0</number>
+                             </property>
+                             <property name="bottomMargin">
+                              <number>0</number>
+                             </property>
+                             <item>
+                              <widget class="QFrame" name="hg_buttons">
+                               <property name="sizePolicy">
+                                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                                 <horstretch>0</horstretch>
+                                 <verstretch>0</verstretch>
+                                </sizepolicy>
+                               </property>
+                               <property name="minimumSize">
+                                <size>
+                                 <width>0</width>
+                                 <height>0</height>
+                                </size>
+                               </property>
+                               <property name="styleSheet">
+                                <string notr="true">QPushButton{
 background-color:rgb(16,16,16);
 border: 1px solid rgb(16,16,16);
 font-weight: bold;
@@ -3000,370 +2993,142 @@ background-color:rgb(45,45,45);
 QPushButton:checked{
 background-color:rgb(0,170,118);
 }</string>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::Shape::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Shadow::Raised</enum>
-                            </property>
-                            <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="4,4,4,4,4,4,20">
-                             <property name="spacing">
-                              <number>10</number>
-                             </property>
-                             <property name="leftMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="topMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="rightMargin">
-                              <number>0</number>
-                             </property>
-                             <property name="bottomMargin">
-                              <number>0</number>
-                             </property>
-                             <item>
-                              <widget class="QPushButton" name="hg_1d">
-                               <property name="text">
-                                <string>1D</string>
                                </property>
-                               <property name="checkable">
-                                <bool>true</bool>
-                               </property>
-                               <property name="autoExclusive">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="hg_5d">
-                               <property name="text">
-                                <string>5D</string>
-                               </property>
-                               <property name="checkable">
-                                <bool>true</bool>
-                               </property>
-                               <property name="autoExclusive">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="hg_1mo">
-                               <property name="text">
-                                <string>1M</string>
-                               </property>
-                               <property name="checkable">
-                                <bool>true</bool>
-                               </property>
-                               <property name="checked">
-                                <bool>true</bool>
-                               </property>
-                               <property name="autoExclusive">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="hg_6mo">
-                               <property name="text">
-                                <string>6M</string>
-                               </property>
-                               <property name="checkable">
-                                <bool>true</bool>
-                               </property>
-                               <property name="autoExclusive">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="hg_ytd">
-                               <property name="text">
-                                <string>YTD</string>
-                               </property>
-                               <property name="checkable">
-                                <bool>true</bool>
-                               </property>
-                               <property name="autoExclusive">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QPushButton" name="hg_1y">
-                               <property name="text">
-                                <string>1Y</string>
-                               </property>
-                               <property name="checkable">
-                                <bool>true</bool>
-                               </property>
-                               <property name="autoExclusive">
-                                <bool>true</bool>
-                               </property>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QFrame" name="empty_2">
                                <property name="frameShape">
                                 <enum>QFrame::Shape::StyledPanel</enum>
                                </property>
                                <property name="frameShadow">
                                 <enum>QFrame::Shadow::Raised</enum>
                                </property>
-                              </widget>
-                             </item>
-                            </layout>
-                           </widget>
-                          </item>
-                          <item>
-                           <widget class="QFrame" name="hg_frame">
-                            <property name="styleSheet">
-                             <string notr="true">background-color: black</string>
-                            </property>
-                            <property name="frameShape">
-                             <enum>QFrame::Shape::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Shadow::Raised</enum>
-                            </property>
-                           </widget>
-                          </item>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QFrame" name="holdings_list_pie">
-                         <property name="frameShape">
-                          <enum>QFrame::Shape::StyledPanel</enum>
-                         </property>
-                         <property name="frameShadow">
-                          <enum>QFrame::Shadow::Raised</enum>
-                         </property>
-                         <layout class="QHBoxLayout" name="horizontalLayout_28" stretch="2,2">
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
-                          <item>
-                           <widget class="QFrame" name="frame_14">
-                            <property name="frameShape">
-                             <enum>QFrame::Shape::StyledPanel</enum>
-                            </property>
-                            <property name="frameShadow">
-                             <enum>QFrame::Shadow::Raised</enum>
-                            </property>
-                            <layout class="QVBoxLayout" name="verticalLayout_11" stretch="1,1,1">
-                             <item>
-                              <widget class="QFrame" name="frame_16">
-                               <property name="frameShape">
-                                <enum>QFrame::Shape::StyledPanel</enum>
-                               </property>
-                               <property name="frameShadow">
-                                <enum>QFrame::Shadow::Raised</enum>
-                               </property>
-                               <layout class="QHBoxLayout" name="horizontalLayout_34" stretch="20,30,30">
+                               <layout class="QHBoxLayout" name="horizontalLayout_17" stretch="4,4,4,4,4,4">
+                                <property name="spacing">
+                                 <number>10</number>
+                                </property>
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
                                 <property name="topMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="rightMargin">
                                  <number>0</number>
                                 </property>
                                 <property name="bottomMargin">
                                  <number>0</number>
                                 </property>
                                 <item>
-                                 <widget class="QLabel" name="text_label_6">
-                                  <property name="styleSheet">
-                                   <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 17px;</string>
-                                  </property>
+                                 <widget class="QPushButton" name="hg_1d">
                                   <property name="text">
-                                   <string>TICKERS:</string>
+                                   <string>1D</string>
                                   </property>
-                                  <property name="margin">
-                                   <number>0</number>
+                                  <property name="checkable">
+                                   <bool>true</bool>
                                   </property>
-                                  <property name="indent">
-                                   <number>0</number>
+                                  <property name="autoExclusive">
+                                   <bool>true</bool>
                                   </property>
                                  </widget>
                                 </item>
                                 <item>
-                                 <widget class="QComboBox" name="graph_combo_box_2">
-                                  <property name="sizePolicy">
-                                   <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                                    <horstretch>0</horstretch>
-                                    <verstretch>0</verstretch>
-                                   </sizepolicy>
+                                 <widget class="QPushButton" name="hg_5d">
+                                  <property name="text">
+                                   <string>5D</string>
                                   </property>
+                                  <property name="checkable">
+                                   <bool>true</bool>
+                                  </property>
+                                  <property name="autoExclusive">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="hg_1mo">
+                                  <property name="text">
+                                   <string>1M</string>
+                                  </property>
+                                  <property name="checkable">
+                                   <bool>true</bool>
+                                  </property>
+                                  <property name="checked">
+                                   <bool>true</bool>
+                                  </property>
+                                  <property name="autoExclusive">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="hg_6mo">
+                                  <property name="text">
+                                   <string>6M</string>
+                                  </property>
+                                  <property name="checkable">
+                                   <bool>true</bool>
+                                  </property>
+                                  <property name="autoExclusive">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="hg_ytd">
+                                  <property name="text">
+                                   <string>YTD</string>
+                                  </property>
+                                  <property name="checkable">
+                                   <bool>true</bool>
+                                  </property>
+                                  <property name="autoExclusive">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                                <item>
+                                 <widget class="QPushButton" name="hg_1y">
+                                  <property name="text">
+                                   <string>1Y</string>
+                                  </property>
+                                  <property name="checkable">
+                                   <bool>true</bool>
+                                  </property>
+                                  <property name="autoExclusive">
+                                   <bool>true</bool>
+                                  </property>
+                                 </widget>
+                                </item>
+                               </layout>
+                              </widget>
+                             </item>
+                             <item>
+                              <widget class="QFrame" name="frame_19">
+                               <property name="frameShape">
+                                <enum>QFrame::Shape::StyledPanel</enum>
+                               </property>
+                               <property name="frameShadow">
+                                <enum>QFrame::Shadow::Raised</enum>
+                               </property>
+                               <layout class="QVBoxLayout" name="verticalLayout_11" stretch="4,1">
+                                <property name="leftMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="topMargin">
+                                 <number>4</number>
+                                </property>
+                                <property name="rightMargin">
+                                 <number>0</number>
+                                </property>
+                                <property name="bottomMargin">
+                                 <number>0</number>
+                                </property>
+                                <item>
+                                 <widget class="QFrame" name="frame_15">
                                   <property name="styleSheet">
-                                   <string notr="true">background-color: rgba(16,16,16,255);
-</string>
+                                   <string notr="true">background-color: #14181c;
+border: 1px solid;
+border-radius: 5px;
+border-color: #363f44;</string>
                                   </property>
-                                  <item>
-                                   <property name="text">
-                                    <string>VTI</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>SPY</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>VOO</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>SCHB</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>DIA</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>QQQ</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>-------</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLK</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLF</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLE</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLY</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLI</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLV</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLC</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLU</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLB</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>XLRE</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>VNQ</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>-------</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>VXUS</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>IXUS</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>VEU</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>-------</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>VIXY</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>SH</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>SQQQ</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>-------</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>BND</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>AGG</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>-------</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>ARKK</string>
-                                   </property>
-                                  </item>
-                                  <item>
-                                   <property name="text">
-                                    <string>SOXX</string>
-                                   </property>
-                                  </item>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <widget class="QFrame" name="frame_18">
                                   <property name="frameShape">
                                    <enum>QFrame::Shape::StyledPanel</enum>
                                   </property>
@@ -3372,66 +3137,308 @@ background-color:rgb(0,170,118);
                                   </property>
                                  </widget>
                                 </item>
-                               </layout>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QFrame" name="frame_17">
-                               <property name="frameShape">
-                                <enum>QFrame::Shape::StyledPanel</enum>
-                               </property>
-                               <property name="frameShadow">
-                                <enum>QFrame::Shadow::Raised</enum>
-                               </property>
-                               <layout class="QHBoxLayout" name="horizontalLayout_35">
-                                <property name="topMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="bottomMargin">
-                                 <number>0</number>
-                                </property>
                                 <item>
-                                 <widget class="QLabel" name="text_label_7">
-                                  <property name="styleSheet">
-                                   <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 17px;</string>
+                                 <widget class="QFrame" name="holdings_list_pie_2">
+                                  <property name="frameShape">
+                                   <enum>QFrame::Shape::StyledPanel</enum>
                                   </property>
-                                  <property name="text">
-                                   <string>AMOUNT: </string>
+                                  <property name="frameShadow">
+                                   <enum>QFrame::Shadow::Raised</enum>
                                   </property>
-                                  <property name="margin">
-                                   <number>0</number>
-                                  </property>
-                                  <property name="indent">
-                                   <number>0</number>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <widget class="QPlainTextEdit" name="plainTextEdit_2">
-                                  <property name="enabled">
-                                   <bool>true</bool>
-                                  </property>
-                                  <property name="maximumSize">
-                                   <size>
-                                    <width>16777215</width>
-                                    <height>60</height>
-                                   </size>
-                                  </property>
-                                  <property name="styleSheet">
-                                   <string notr="true">background-color:rgb(16,16,16)</string>
-                                  </property>
-                                  <property name="tabStopDistance">
-                                   <double>80.000000000000000</double>
-                                  </property>
-                                 </widget>
-                                </item>
-                               </layout>
-                              </widget>
-                             </item>
-                             <item>
-                              <widget class="QFrame" name="frame_15">
-                               <property name="styleSheet">
-                                <string notr="true">QPushButton{
+                                  <layout class="QHBoxLayout" name="horizontalLayout_37" stretch="2">
+                                   <property name="topMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <property name="bottomMargin">
+                                    <number>0</number>
+                                   </property>
+                                   <item>
+                                    <widget class="QFrame" name="frame_20">
+                                     <property name="frameShape">
+                                      <enum>QFrame::Shape::StyledPanel</enum>
+                                     </property>
+                                     <property name="frameShadow">
+                                      <enum>QFrame::Shadow::Raised</enum>
+                                     </property>
+                                     <layout class="QVBoxLayout" name="verticalLayout_42" stretch="1,1,0">
+                                      <item>
+                                       <widget class="QFrame" name="frame_21">
+                                        <property name="frameShape">
+                                         <enum>QFrame::Shape::StyledPanel</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                         <enum>QFrame::Shadow::Raised</enum>
+                                        </property>
+                                        <layout class="QHBoxLayout" name="horizontalLayout_38" stretch="20,30,30">
+                                         <property name="topMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="bottomMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <item>
+                                          <widget class="QLabel" name="text_label_8">
+                                           <property name="styleSheet">
+                                            <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 17px;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string>TICKERS:</string>
+                                           </property>
+                                           <property name="margin">
+                                            <number>0</number>
+                                           </property>
+                                           <property name="indent">
+                                            <number>0</number>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item>
+                                          <widget class="QComboBox" name="portfolio_combobox">
+                                           <property name="sizePolicy">
+                                            <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                                             <horstretch>0</horstretch>
+                                             <verstretch>0</verstretch>
+                                            </sizepolicy>
+                                           </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">background-color: rgba(16,16,16,255);
+</string>
+                                           </property>
+                                           <item>
+                                            <property name="text">
+                                             <string>VTI</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>SPY</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>VOO</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>SCHB</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>DIA</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>QQQ</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>-------</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLK</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLF</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLE</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLY</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLI</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLV</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLC</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLU</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLB</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>XLRE</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>VNQ</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>-------</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>VXUS</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>IXUS</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>VEU</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>-------</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>VIXY</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>SH</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>SQQQ</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>-------</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>BND</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>AGG</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>-------</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>ARKK</string>
+                                            </property>
+                                           </item>
+                                           <item>
+                                            <property name="text">
+                                             <string>SOXX</string>
+                                            </property>
+                                           </item>
+                                          </widget>
+                                         </item>
+                                         <item>
+                                          <widget class="QFrame" name="frame_22">
+                                           <property name="frameShape">
+                                            <enum>QFrame::Shape::StyledPanel</enum>
+                                           </property>
+                                           <property name="frameShadow">
+                                            <enum>QFrame::Shadow::Raised</enum>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                        </layout>
+                                       </widget>
+                                      </item>
+                                      <item>
+                                       <widget class="QFrame" name="frame_23">
+                                        <property name="frameShape">
+                                         <enum>QFrame::Shape::StyledPanel</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                         <enum>QFrame::Shadow::Raised</enum>
+                                        </property>
+                                        <layout class="QHBoxLayout" name="horizontalLayout_39">
+                                         <property name="topMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <property name="bottomMargin">
+                                          <number>0</number>
+                                         </property>
+                                         <item>
+                                          <widget class="QLabel" name="text_label_9">
+                                           <property name="styleSheet">
+                                            <string notr="true">font: bold &quot;Segoe UI&quot;; font-size: 17px;</string>
+                                           </property>
+                                           <property name="text">
+                                            <string>AMOUNT: </string>
+                                           </property>
+                                           <property name="margin">
+                                            <number>0</number>
+                                           </property>
+                                           <property name="indent">
+                                            <number>0</number>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item>
+                                          <widget class="QPlainTextEdit" name="portfolio_amount">
+                                           <property name="enabled">
+                                            <bool>true</bool>
+                                           </property>
+                                           <property name="maximumSize">
+                                            <size>
+                                             <width>16777215</width>
+                                             <height>49</height>
+                                            </size>
+                                           </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">background-color:rgb(16,16,16)</string>
+                                           </property>
+                                           <property name="tabStopDistance">
+                                            <double>10.000000000000000</double>
+                                           </property>
+                                           <property name="backgroundVisible">
+                                            <bool>false</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                        </layout>
+                                       </widget>
+                                      </item>
+                                      <item>
+                                       <widget class="QFrame" name="frame_24">
+                                        <property name="styleSheet">
+                                         <string notr="true">QPushButton{
 background-color:rgb(16,16,16);
 border: 1px solid rgb(16,16,16);
 font-weight: bold;
@@ -3443,56 +3450,111 @@ background-color:rgb(25,25,25);
 QPushButton:clicked{
 background-color:rgb(45,45,45);
 }</string>
-                               </property>
-                               <property name="frameShape">
-                                <enum>QFrame::Shape::StyledPanel</enum>
-                               </property>
-                               <property name="frameShadow">
-                                <enum>QFrame::Shadow::Raised</enum>
-                               </property>
-                               <layout class="QHBoxLayout" name="horizontalLayout_36">
-                                <property name="topMargin">
-                                 <number>0</number>
-                                </property>
-                                <property name="bottomMargin">
-                                 <number>0</number>
-                                </property>
-                                <item>
-                                 <widget class="QPushButton" name="add_btn">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>0</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="text">
-                                   <string>ADD</string>
-                                  </property>
-                                  <property name="checkable">
-                                   <bool>true</bool>
-                                  </property>
-                                  <property name="autoExclusive">
-                                   <bool>true</bool>
-                                  </property>
-                                 </widget>
-                                </item>
-                                <item>
-                                 <widget class="QPushButton" name="subtract_btn">
-                                  <property name="minimumSize">
-                                   <size>
-                                    <width>0</width>
-                                    <height>30</height>
-                                   </size>
-                                  </property>
-                                  <property name="text">
-                                   <string>SUBTRACT</string>
-                                  </property>
-                                  <property name="checkable">
-                                   <bool>true</bool>
-                                  </property>
-                                  <property name="autoExclusive">
-                                   <bool>true</bool>
-                                  </property>
+                                        </property>
+                                        <property name="frameShape">
+                                         <enum>QFrame::Shape::StyledPanel</enum>
+                                        </property>
+                                        <property name="frameShadow">
+                                         <enum>QFrame::Shadow::Raised</enum>
+                                        </property>
+                                        <layout class="QHBoxLayout" name="horizontalLayout_28">
+                                         <item>
+                                          <widget class="QPushButton" name="add_btn">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>0</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="text">
+                                            <string>ADD</string>
+                                           </property>
+                                           <property name="checkable">
+                                            <bool>true</bool>
+                                           </property>
+                                           <property name="autoExclusive">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item>
+                                          <widget class="QPushButton" name="subtract_btn">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>0</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="text">
+                                            <string>SUBTRACT</string>
+                                           </property>
+                                           <property name="checkable">
+                                            <bool>true</bool>
+                                           </property>
+                                           <property name="autoExclusive">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item>
+                                          <widget class="QPushButton" name="delete_btn">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>0</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="text">
+                                            <string>DELETE</string>
+                                           </property>
+                                           <property name="checkable">
+                                            <bool>true</bool>
+                                           </property>
+                                           <property name="autoExclusive">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                         <item>
+                                          <widget class="QPushButton" name="reset_btn">
+                                           <property name="minimumSize">
+                                            <size>
+                                             <width>0</width>
+                                             <height>30</height>
+                                            </size>
+                                           </property>
+                                           <property name="styleSheet">
+                                            <string notr="true">QPushButton{
+background-color:rgb(255,65,67);
+border: 1px solid rgb(16,16,16);
+font-weight: bold;
+}
+QPushButton:hover{
+background-color:rgb(255,105,107);
+}
+
+QPushButton:clicked{
+background-color:rgb(255,145,147);
+}</string>
+                                           </property>
+                                           <property name="text">
+                                            <string>RESET PORT</string>
+                                           </property>
+                                           <property name="checkable">
+                                            <bool>true</bool>
+                                           </property>
+                                           <property name="autoExclusive">
+                                            <bool>true</bool>
+                                           </property>
+                                          </widget>
+                                         </item>
+                                        </layout>
+                                       </widget>
+                                      </item>
+                                     </layout>
+                                    </widget>
+                                   </item>
+                                  </layout>
                                  </widget>
                                 </item>
                                </layout>
@@ -3504,7 +3566,10 @@ background-color:rgb(45,45,45);
                           <item>
                            <widget class="QFrame" name="holdings_pie_chart">
                             <property name="styleSheet">
-                             <string notr="true">background-color:black;</string>
+                             <string notr="true">background-color: #14181c;
+border: 1px solid;
+border-radius: 5px;
+border-color: #363f44;</string>
                             </property>
                             <property name="frameShape">
                              <enum>QFrame::Shape::StyledPanel</enum>
