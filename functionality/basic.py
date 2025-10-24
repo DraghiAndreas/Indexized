@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import random
 import yfinance as yf
-from colorama import Fore, Style
 
 
 
@@ -156,8 +155,8 @@ def random_quote():
          'The only man who never makes mistakes is the man who never does anything.',
          'Knowing what\'s right doesn\'t mean much unless you do what\'s right.',
          'Keep your eyes on the stars and your feet on the ground.',
-         'If you could kick the person in the pants responsible for most of your trouble, you wouldn\'t sit for a month.',
-         'In any moment of decision, the best thing you can do is the right thing. The worst thing you can do is nothing.',
+         'If you could kick the person in the pants responsible for most of your trouble,\n you wouldn\'t sit for a month.',
+         'In any moment of decision, the best thing you can do is the right thing. \nThe worst thing you can do is nothing.',
          'Courage is not having the strength to go on; it is going on when you don\'t have the strength.',
          'Never throughout history has a man who lived a life of ease left a name worth remembering.',
          'The reason fat men are good natured is they can neigher fight nor run.',

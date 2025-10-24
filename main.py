@@ -1,24 +1,16 @@
 import sys
 import os
-import platform
 import pandas as pd
 import numpy as np
-import time
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QHeaderView, QAbstractItemView, QTableWidgetItem
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
 
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
+from functionality.__init_func__ import *
+from modules.__init_ui__ import *
 
-
-from functionality.basic import *
-from functionality.portfolio import *
-from functionality.cache_test import *
-
-from modules import *
-os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
+os.environ["QT_FONT_DPI"] = "96" 
 
 
 widgets = None
@@ -78,9 +70,7 @@ class MainWindow(QMainWindow):
             self.username = n
         else:
             self.username = "User"
-        self.updateUsername()
-
-        Settings.ENABLE_CUSTOM_TITLE_BAR = True
+        self.update_username()
 
 
         title = "Indexized"
@@ -93,25 +83,22 @@ class MainWindow(QMainWindow):
 
         UIFunctions.uiDefinitions(self)
 
-        widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
-
         widgets.quote_label.setText(random_quote()) #Random Quoate
-        self.updateTop5()
+        self.update_top_5()
 
-        widgets.btn_home.clicked.connect(self.buttonClick)
-        widgets.btn_widgets.clicked.connect(self.buttonClick)
-        widgets.btn_new.clicked.connect(self.buttonClick)
-        widgets.btn_save.clicked.connect(self.buttonClick)
-        widgets.comboBox.currentIndexChanged.connect(lambda data: print(data))
+        widgets.btn_home.clicked.connect(self.button_click)
+        widgets.btn_widgets.clicked.connect(self.button_click)
+        widgets.btn_new.clicked.connect(self.button_click)
+        widgets.btn_save.clicked.connect(self.button_click)
 
-        widgets.g_1d.clicked.connect(self.buttonGraph)
-        widgets.g_1mo.clicked.connect(self.buttonGraph)
-        widgets.g_1y.clicked.connect(self.buttonGraph)
-        widgets.g_5d.clicked.connect(self.buttonGraph)
-        widgets.g_5y.clicked.connect(self.buttonGraph)
-        widgets.g_6mo.clicked.connect(self.buttonGraph)
-        widgets.g_max.clicked.connect(self.buttonGraph)
-        widgets.g_ytd.clicked.connect(self.buttonGraph)
+        widgets.g_1d.clicked.connect(self.button_graph)
+        widgets.g_1mo.clicked.connect(self.button_graph)
+        widgets.g_1y.clicked.connect(self.button_graph)
+        widgets.g_5d.clicked.connect(self.button_graph)
+        widgets.g_5y.clicked.connect(self.button_graph)
+        widgets.g_6mo.clicked.connect(self.button_graph)
+        widgets.g_max.clicked.connect(self.button_graph)
+        widgets.g_ytd.clicked.connect(self.button_graph)
         widgets.graph_combo_box.currentIndexChanged.connect(self.combo_changed)
 
         widgets.hg_1d.clicked.connect(self.button_graph_port)
@@ -121,7 +108,7 @@ class MainWindow(QMainWindow):
         widgets.hg_6mo.clicked.connect(self.button_graph_port)
         widgets.hg_ytd.clicked.connect(self.button_graph_port)
 
-        widgets.save_username_btn.clicked.connect(self.saveUsername)
+        widgets.save_username_btn.clicked.connect(self.save_username)
 
         widgets.add_btn.clicked.connect(self.add_stock)
         widgets.subtract_btn.clicked.connect(self.subtract_stock)
@@ -129,6 +116,7 @@ class MainWindow(QMainWindow):
         widgets.reset_btn.clicked.connect(self.reset_port)
 
 
+        widgets.portfolio_table.horizontalHeader().setStyleSheet('::section{background-color:#101010;}')
         def openCloseLeftBox():
             UIFunctions.toggleLeftBox(self, True)
         widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
@@ -142,7 +130,7 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
-    def saveUsername(self):
+    def save_username(self):
         user = widgets.username_input.toPlainText()
         if not user:
             print('Username cannot be empty')
@@ -150,14 +138,14 @@ class MainWindow(QMainWindow):
             print('Username cannot have over 30 characters')
         else:
             self.username = user
-            self.updateUsername()
+            self.update_username()
             save_user(user)        
     
-    def updateUsername(self):
+    def update_username(self):
         text = 'Welcome, '+ self.username +'!' 
         widgets.welcome_label.setText(text)
 
-    def buttonGraph(self):
+    def button_graph(self):
         text = self.sender().objectName()[2:] #GRABBING JUST THE PERIOD FROM THE NAME
         self.graph_period = text
         self.graph_data_update()
@@ -167,7 +155,7 @@ class MainWindow(QMainWindow):
         self.graph_period_port = text
         self.portfolio_graph_update()
 
-    def updateTop5(self):
+    def update_top_5(self):
         l_asc = get_top_5(1)
         l_desc = get_top_5(0)
         curr = get_currencies()
@@ -296,7 +284,10 @@ class MainWindow(QMainWindow):
     
     def update_total(self,tick, am):
         total = np.array([price_return(t)*am[i] for i,t in enumerate(tick,0)])
-        widgets.all_holdings_label.setText(f'US${round(np.sum(total),2)}')    
+        t = round(np.sum(total),2)
+        widgets.all_holdings_label.setText(f'US${t}')
+        widgets.titleLeftDescription.setText(f'Portfolio-total : {t}$')
+
     
     def update_port_table(self,tick, val):
         widgets.portfolio_table.setRowCount(0)
@@ -375,7 +366,7 @@ class MainWindow(QMainWindow):
                 widgets.period_change.setText(f'-${abs(change)}({percent}%)')
             self.set_stylesheet2(widgets.period_change,change)
 
-            self.graph_creatoraa(self.portGraph,total_values,change,dates)
+            self.graph_creator(self.portGraph,total_values,change,dates)
         else:
             ax = self.portGraph.ax
             fig = self.portGraph.fig
@@ -443,7 +434,7 @@ class MainWindow(QMainWindow):
 
         print(f'{self.graph_tick} : start : {start} | end : {end} | change : {change} | percent : {percent}')
 
-        self.graph_creatoraa(self.canvas,prices,change,dates)
+        self.graph_creator(self.canvas,prices,change,dates)
         if change > 0:
             widgets.g_change_label.setStyleSheet('color: #2ecc71;font-size: 18px;font: bold "Segoe UI";')
             change = '+'+str(change)
@@ -454,7 +445,7 @@ class MainWindow(QMainWindow):
         widgets.g_change_label.setText(f'{change}$ ({percent}%)')
         widgets.g_name_label.setText(tick_full(self.graph_tick))
 
-    def graph_creatoraa(self,canvas, prices, change, dates):
+    def graph_creator(self,canvas, prices, change, dates):
         ax = canvas.ax
         fig = canvas.fig
 
@@ -479,7 +470,7 @@ class MainWindow(QMainWindow):
 
         canvas.draw()  # update the canvas
 
-    def buttonClick(self):
+    def button_click(self):
         btn = self.sender()
         btnName = btn.objectName()
 
@@ -508,19 +499,13 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         print(f'Button "{btnName}" pressed!')
-
+    
     def resizeEvent(self, event):
         UIFunctions.resize_grips(self)
 
     def mousePressEvent(self, event):
         self.dragPos = event.globalPos()
-
-        # PRINT MOUSE EVENTS
-        if event.buttons() == Qt.LeftButton:
-            print('Mouse click: LEFT CLICK')
-        if event.buttons() == Qt.RightButton:
-            print('Mouse click: RIGHT CLICK')
-
+        
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.ico"))
