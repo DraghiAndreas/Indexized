@@ -1,4 +1,4 @@
-<h1 align="center">📈 Indexized</h1>
+<h1 align="center">Indexized</h1>
 
 <p align="center">
   <em>A sleek, data-driven stock tracking desktop app built with Python.</em>
@@ -14,7 +14,7 @@
 
 ---
 
-## 🖼️ Preview
+## Preview
 
 <p align="center">
   <img src="assets/screenshot.png" alt="Indexized UI Preview" width="800">
@@ -22,27 +22,27 @@
 
 ---
 
-## 🧠 Overview
+## Overview
 
 **Indexized** is a **modern desktop stock tracking and portfolio management app**, designed to make financial insights simple, visual, and interactive.  
 It combines the power of **Yahoo Finance**, **PySide6 UI**, **SQLite storage**, and **Matplotlib** visualization — all wrapped in a clean interface.
 
 ---
 
-## ⚙️ Features
+## Features
 
-### 🏠 **Home Tab**
+### **Home Tab**
 Your dashboard for quick insights:
-- Personalized greeting: `"Hello, <user>!"`
+- Personalized greeting: `"Welcome, <user>!"`
 - Random inspirational quote fetched dynamically.
 - Three sub-tabs for market summaries:
   - **Top Gainers:** Displays the 5 best-performing stocks.
   - **Top Losers:** Shows the 5 weakest stocks.
-  - **Currencies:** Lists top 5 global currency exchange rates.
+  - **Currencies:** Lists top 5 most important global currency exchange rates.
 
 ---
 
-### 📊 **Stock Tracker**
+### **Stock Tracker**
 Visualize and explore any stock:
 - Select a **ticker** to track.
 - View **historical evolution** and **live data**.
@@ -52,27 +52,26 @@ Visualize and explore any stock:
 
 ---
 
-### 💼 **Portfolio Manager**
+### **Portfolio Manager**
 Manage your personalized investment portfolio:
 - Add or remove assets easily.
 - Track asset quantities and total portfolio value.
 - Four main controls:
-  - ➕ **Add:** Add a specified amount of the selected ticker.
-  - ➖ **Subtract:** Remove a specified amount.
-  - 🗑️ **Delete:** Remove a ticker entirely.
-  - 🔴 **Reset:** Clear the portfolio with one click.
+  - **Add:** Add a specified amount of the selected ticker.
+  - **Subtract:** Remove a specified amount.
+  - **Delete:** Remove a ticker entirely.
+  - **Reset:** Clear the portfolio with one click.
 - All data is securely stored in an **SQLite** database for persistence.
 
 ---
 
-### 📚 **Asset Library**
+### **Asset Library**
 Explore all supported assets, neatly categorized:
 - Browse **whitelisted tickers** grouped by sector or category.
-- Ensures only valid, verified assets can be tracked or added.
 
 ---
 
-## 🧩 Tech Stack
+## Tech Stack
 
 | Component | Description |
 |------------|-------------|
@@ -81,13 +80,21 @@ Explore all supported assets, neatly categorized:
 | **yfinance** | Fetches real-time and historical stock/currency data |
 | **SQLite** | Local database for portfolio storage |
 | **Matplotlib** | Plots and visualizes stock data |
-| **SQLAlchemy** *(optional)* | ORM layer for database handling |
 
 ---
 
-## 📦 Installation
+## Installation
 
-### 1️⃣ Clone the repository
+### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/Indexized.git
+git clone https://github.com/DraghiAndreas/Indexized.git
 cd Indexized
+```
+### 2. Install the requirements
+```bash
+pip install -r requirements
+```
+### 3. Run main.py
+```bash
+python main.py
+```
