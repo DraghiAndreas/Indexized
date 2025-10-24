@@ -16,8 +16,6 @@
 
 ## 🖼️ Preview
 
-> 💡 *Add an image of your app’s interface here (e.g., a screenshot or GIF).*
-
 <p align="center">
   <img src="assets/screenshot.png" alt="Indexized UI Preview" width="800">
 </p>
