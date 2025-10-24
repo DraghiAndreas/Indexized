@@ -98,3 +98,11 @@ pip install -r requirements
 ```bash
 python main.py
 ```
+## License & About
+### MIT License
+### About:
+Indexized was created as a personal project and a showcase of my skills as a student in Automation and Systems Engineering. The app demonstrates my ability to combine Python, PySide6, yfinance, SQLite, and Matplotlib into a functional, modern desktop application for stock tracking and portfolio management.
+
+The user interface of Indexized is based on an open-source UI by Wanderson M. Pimenta. I have made significant changes and improvements to suit this project, but I want to give credit where it’s due.
+
+This project serves as a learning and experimentation tool, helping me refine my software development skills while creating something both functional and visually appealing.
