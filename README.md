@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="assets/indexized.gif"width="800">
+</p>
+
+
 <h1 align="center">Indexized</h1>
 
 <p align="center">
